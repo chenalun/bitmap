@@ -63,3 +63,19 @@ func (b *BitMap) GetBits() []byte {
 func (b *BitMap) ToString() string {
 	return fmt.Sprintf("%b", b.bits)
 }
+
+// GetByteToInts 将指定的byte转化为[]int
+func (b *BitMap) GetByteToInts(index int) []int {
+	var intArr []int
+	if b.size > index {
+		byteNum := b.bits[index]
+
+		for i := 0; i < 7; i++ {
+			if (byteNum & (1 << i)) > 0 {
+				intArr = append(intArr, index*8+i+1)
+			}
+		}
+	}
+
+	return intArr
+}
