@@ -66,7 +66,7 @@ func (b *BitMap) ToString() string {
 
 // GetByteToInts 将指定的byte转化为[]int
 func (b *BitMap) GetByteToInts(index int) []int {
-	var intArr []int
+	intArr := make([]int, 0, 8)
 	if b.size > index {
 		byteNum := b.bits[index]
 
