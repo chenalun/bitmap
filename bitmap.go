@@ -17,7 +17,7 @@ func NewBitMap(max int) *BitMap {
 
 // Add 添加一个数据到bits中
 func (b *BitMap) Add(num int) {
-	if num > b.max || num < 0 {
+	if num > b.max || num <= 0 {
 		return
 	}
 
@@ -33,9 +33,18 @@ func (b *BitMap) Add(num int) {
 	b.size = len(b.bits)
 }
 
+// Remove 移除一位bit
+func (b *BitMap) Remove(num int) {
+	index := num / 8
+	if b.size > index {
+		pos := num % 8
+		b.bits[index] &^= 1 << pos
+	}
+}
+
 // IsExist 是否存在bits中
 func (b *BitMap) IsExist(num int) bool {
-	if num > b.max || num < 0 {
+	if num > b.max || num <= 0 {
 		return false
 	}
 
@@ -70,9 +79,9 @@ func (b *BitMap) GetByteToInts(index int) []int {
 	if b.size > index {
 		byteNum := b.bits[index]
 
-		for i := 0; i < 7; i++ {
+		for i := 0; i < 8; i++ {
 			if (byteNum & (1 << i)) > 0 {
-				intArr = append(intArr, index*8+i+1)
+				intArr = append(intArr, index*8+i)
 			}
 		}
 	}

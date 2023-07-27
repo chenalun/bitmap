@@ -35,7 +35,7 @@ func TestBigMap(t *testing.T) {
 
 	b := bitmap.NewBitMap(total1)
 
-	for i := 0; i < total1; i++ {
+	for i := 1; i <= total1; i++ {
 		b.Add(rand.Intn(total1)) // 从1~20亿 取一个随机数
 	}
 
@@ -45,4 +45,16 @@ func TestBigMap(t *testing.T) {
 	fmt.Println(b.GetBits()[b.Size()-2], fmt.Sprintf("%b", b.GetBits()[b.Size()-2]), b.GetByteToInts(b.Size()-2))
 	fmt.Println(b.GetBits()[b.Size()-1], fmt.Sprintf("%b", b.GetBits()[b.Size()-1]), b.GetByteToInts(b.Size()-1))
 
+}
+
+func TestRemoveBit(t *testing.T) {
+	bitMap := bitmap.NewBitMap(100)
+	for i := 1; i <= 16; i++ {
+		bitMap.Add(i)
+	}
+
+	fmt.Println(bitMap.Size(), bitMap.ToString())
+	fmt.Println(bitMap.GetByteToInts(0), bitMap.GetByteToInts(1), bitMap.GetByteToInts(2))
+	bitMap.Remove(12)
+	fmt.Println(bitMap.GetByteToInts(0), bitMap.GetByteToInts(1), bitMap.GetByteToInts(2))
 }
