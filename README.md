@@ -1,5 +1,5 @@
 # bitmap
-GoLang bitmap 算法
+GoLang bitmap 位图算法
 
 ## 基本原理
 用一个bit来标记某个元素对应的value，key就是该元素，使用bit存储大大节省空间
